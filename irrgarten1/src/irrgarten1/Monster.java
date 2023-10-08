@@ -11,7 +11,7 @@ public class Monster {
     private int col;
     
     //Constructor.
-    public Monster(String name, float intellige, float strenth){
+    public Monster(String name, float intelligence, float strength){
         this.name = name;
         this.intelligence = intelligence;
         this.strength = strength;
@@ -27,17 +27,18 @@ public class Monster {
         return Dice.intensity(strength);
     }
     
-    public boolean defend(float receivedAttack){
+    /*public boolean defend(float receivedAttack){
         
-    }
+    }*/
     
     public void setPos(int row, int col){
         this.row = row;
         this.col = col;
     }
     
+    @Override
     public String toString(){
-        
+        return "M[name: " + name + ", intelligence:" + intelligence + ", strength: " + strength + "]"; 
     }
 
     private void gotWounded(){

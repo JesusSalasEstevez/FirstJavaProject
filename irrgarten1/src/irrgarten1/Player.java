@@ -25,8 +25,6 @@ public class Player {
         this.strength = strength;
         this.health = INITIAL_HEALTH;
         this.name = "Player#" + number;
-        this.row;
-        this.col;
         this.consecutiveHits = 0;
     }
     
@@ -36,6 +34,7 @@ public class Player {
         shields.clear();
         weapons.clear();
         resetHits();
+        health = INITIAL_HEALTH;
     }
     
     //Getters
@@ -62,9 +61,9 @@ public class Player {
         return health <= 0;
     }
     
-    public Directions move (Directions direction, Directions[] validMoves){
+    /*public Directions move (Directions direction, Directions[] validMoves){
         
-    }
+    }*/
     
     
     
@@ -74,15 +73,16 @@ public class Player {
     }
     
     //Método que devuelve si defiende o no el ataque que recibe el personaje.
-    public boolean defend(float recivedAttack){
-        return manageHit(recivedAttack);
-    }
+    /*public boolean defend(float recivedAttack){
+        return Dice.manageHit(recivedAttack);
+    }*/
     
-    public void receiveReward(){
+    /*public void receiveReward(){
         
-    }
+    }*/
     
     //Método to_String;
+    @Override
     public String toString(){
         String cadena = "Position [" + row + ", " + col + "]\nHealth " + health + "\n";
         for(int i = 0; i < shields.size(); i++)
@@ -93,13 +93,13 @@ public class Player {
     }
     
     //
-    private void receiveWeapon(Weapon w){
+    /*private void receiveWeapon(Weapon w){
         
     }
     
     private void receiveShield(Shield s){
         
-    }
+    }*/
 
     //Método que crea una nueva instancia de un arma. Recibe los parametros de Dice.
     private Weapon newWeapon(){
@@ -118,9 +118,9 @@ public class Player {
         return sumShields() + intelligence;
     }
     
-    private boolean manageHit(float receivedAttack){
+    /*private boolean manageHit(float receivedAttack){
         
-    }
+    }*/
 
     //Método que pone el valor de impactos consecutivos a cero.
     private void resetHits(){
