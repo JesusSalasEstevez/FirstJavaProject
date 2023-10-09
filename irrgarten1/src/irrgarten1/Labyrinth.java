@@ -21,6 +21,9 @@ public class Labyrinth {
         this.nCols = nCols;
         this.exitCol = exitCol;
         this.exitRow = exitRow;
+        for(int i = 0; i < nRows; i++)
+            for(int j = 0; j < nCols; j++)
+                LabyrinthSquare[i][j] = EMPTY_CHAR;re
     }
     
     //Métodos
@@ -78,7 +81,7 @@ public class Labyrinth {
     
     //Método que devuelve si la posición está dentro del tablero.
     private boolean posOK(int row, int col){
-        return row <= nRows && col <= nCols;
+        return 0 <= row && row < nRows && 0 <= col && col < nCols;
     }
     
     //Método que devuelve true si la posición está vacia.

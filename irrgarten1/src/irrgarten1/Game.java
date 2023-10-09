@@ -6,7 +6,6 @@ public class Game {
     //Atributos de instancia de la clase.
     private int currentPlayerIndex;
     private String log;
-    //
     private Labyrinth labyrinth;
     private Player currentPlayer;
     private ArrayList <Player> players;
@@ -15,7 +14,6 @@ public class Game {
     //Constructor
     public Game(int nplayers){
         currentPlayerIndex = Dice.whoStarts(nplayers);
-        labyrinth = new Labyrinth();
         players = new ArrayList<>();
         currentPlayer = players.get(currentPlayerIndex);
     }
@@ -49,7 +47,7 @@ public class Game {
     
     //Método que configura el laberinto añadiendo obstaculos y monstruos.
     private void configureLabyrinth(){
-        
+
     }
     
     private void nextPlayer(){
