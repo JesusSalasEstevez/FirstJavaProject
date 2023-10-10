@@ -1,5 +1,4 @@
 package irrgarten1;
-import java.util.ArrayList;
 public class Labyrinth {
     //Atributos de instancia de la clase.
     private final char BLOCK_CHAR = 'X';
@@ -23,7 +22,7 @@ public class Labyrinth {
         this.exitRow = exitRow;
         for(int i = 0; i < nRows; i++)
             for(int j = 0; j < nCols; j++)
-                LabyrinthSquare[i][j] = EMPTY_CHAR;re
+                LabyrinthSquare[i][j] = EMPTY_CHAR;
     }
     
     //Métodos
@@ -33,7 +32,7 @@ public class Labyrinth {
     
     //Método que devuelve si hay un jugador en la casilla de salida.
     public boolean haveAWinner(){
-        
+        return true;
     }
     
     //Método toString

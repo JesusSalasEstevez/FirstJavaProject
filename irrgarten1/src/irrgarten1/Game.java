@@ -15,7 +15,9 @@ public class Game {
     public Game(int nplayers){
         currentPlayerIndex = Dice.whoStarts(nplayers);
         players = new ArrayList<>();
+        monsters = new ArrayList<>();
         currentPlayer = players.get(currentPlayerIndex);
+        log = "";
     }
     
     //Métodos
@@ -76,11 +78,11 @@ public class Game {
     }*/
     
     private void logPlayerWon(){
-        log += "Player " + currentPlayerIndex + " has won\n";
+         
     }
     
     private void logMonsterWon(){
-        log += "Player " + currentPlayerIndex + " has lost the combat";
+        log += "Player " + currentPlayerIndex + " has lost the combat\n";
     }
     
     private void logResurrected(){
@@ -96,11 +98,11 @@ public class Game {
     }
     
     private void logNoMonster(){
-        log += "Player " + currentPlayerIndex + " has moved to an empty square or hasn´t moved";
+        log += "Player " + currentPlayerIndex + " has moved to an empty square or hasn´t moved\n";
     }
     
-    private void logRounds(){
-        log += "Player " + currentPlayerIndex + " has consumed all combat rounds";
+    private void logRounds(int rounds, int max){
+    
     }
     
 }

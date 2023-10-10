@@ -5,8 +5,7 @@ public class Irrgarten1_1 {
         Weapon w = new Weapon((float)2.0, 2);
         System.out.println(s.toString());
         System.out.println(w.toString());
-        Player p = new Player ();
-        System.out.println(p.toString() + "\n" + w.discard());
+        System.out.println( w.discard());
     }
     
 }
