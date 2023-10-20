@@ -102,7 +102,7 @@ public class Game {
     }
     
     private void logRounds(int rounds, int max){
-    
+        log += "Player " + currentPlayerIndex + " has reached " + rounds +"/" + max + " rounds\n"; 
     }
     
 }

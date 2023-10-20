@@ -42,7 +42,7 @@ public class Monster {
     }
 
     private void gotWounded(){
-        health -= 1;
+        health --;
     }
 
 }

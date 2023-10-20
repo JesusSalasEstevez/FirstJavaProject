@@ -10,12 +10,15 @@ public class Labyrinth {
     private int nCols;
     private int exitRow;
     private int exitCol;
-    private char[][] LabyrinthSquare = new char [nRows][nCols];
-    private Monster [][] MonsterSquare = new Monster [nRows][nCols];
-    private Player [][] PlayerSquare = new Player [nRows][nCols];
+    private char[][] LabyrinthSquare;
+    private Monster [][] monsters;
+    private Player [][] players;
             
     //Constructor
     public Labyrinth(int nRows, int nCols, int exitRow, int exitCol){
+        this.players = new Player [nRows][nCols];
+        this.monsters = new Monster [nRows][nCols];
+        this.LabyrinthSquare = new char [nRows][nCols];
         this.nRows = nRows;
         this.nCols = nCols;
         this.exitCol = exitCol;
@@ -23,6 +26,7 @@ public class Labyrinth {
         for(int i = 0; i < nRows; i++)
             for(int j = 0; j < nCols; j++)
                 LabyrinthSquare[i][j] = EMPTY_CHAR;
+        LabyrinthSquare[exitRow][exitCol] = EXIT_CHAR;
     }
     
     //Métodos
@@ -32,15 +36,16 @@ public class Labyrinth {
     
     //Método que devuelve si hay un jugador en la casilla de salida.
     public boolean haveAWinner(){
-        return true;
+        return players[nRows][nCols] != null;
     }
     
     //Método toString
+    @Override
     public String toString(){
         String string = "";
         for(int i = 0; i < nRows; i++){
             for(int j = 0; j < nCols; j++){
-                string += LabyrinthSquare[nRows][nCols];
+                string += LabyrinthSquare[i][j];
             }
             string += "\n";
         }
@@ -51,7 +56,7 @@ public class Labyrinth {
     public void addMonster(int row, int col, Monster monster){
         if(posOK(row, col)){
             LabyrinthSquare[row][col] = MONSTER_CHAR;
-            MonsterSquare[row][col] = monster;
+            monsters[row][col] = monster;
         }
 
     }
@@ -124,16 +129,23 @@ public class Labyrinth {
     //
     private int[] dir2Pos(int row, int col, Directions direction){
         if(posOK(row, col))
-            if(direction == Directions.LEFT)
-                col --;
-            else
-                if(direction == Directions.RIGHT)
+            switch(direction){
+                case UP:
+                    row --;
+                break;
+                
+                case RIGHT:
                     col ++;
-                else
-                    if(direction == Directions.UP)
-                        row --;
-                    else
-                        row ++;
+                break;
+                
+                case LEFT:
+                    col --;
+                break;
+                
+                case DOWN:
+                    row ++;
+                break;
+            }
         int [] pos = new int [2];
         pos[0] = row;
         pos[1] = col;
@@ -143,8 +155,10 @@ public class Labyrinth {
     //
     private int[] randomEmptyPos(){
         int [] pos = new int [2];
-        pos[0] = Dice.randomPos(nRows);
-        pos[1] = Dice.randomPos(nCols);
+        do{
+            pos[0] = Dice.randomPos(nRows);
+            pos[1] = Dice.randomPos(nCols);
+        }while(!(LabyrinthSquare[pos[0]][pos[1]] == EMPTY_CHAR) && !(players[pos[0]][pos[1]] == null));
         return pos;
     }
     

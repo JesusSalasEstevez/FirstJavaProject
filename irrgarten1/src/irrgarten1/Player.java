@@ -7,8 +7,8 @@ public class Player {
     private static int INITIAL_HEALTH = 10;
     private static int HITS2LOSE = 3;
     //Atributos de instancia de la clase.
-    private ArrayList<Shield> shields = new ArrayList<Shield>();
-    private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+    private ArrayList<Shield> shields;
+    private ArrayList<Weapon> weapons;
     private String name;
     private char number;
     private float intelligence;
@@ -26,6 +26,8 @@ public class Player {
         this.health = INITIAL_HEALTH;
         this.name = "Player#" + number;
         this.consecutiveHits = 0;
+        this.weapons = new ArrayList();
+        this.shields = new ArrayList();
     }
     
     //Métodos.
@@ -74,7 +76,7 @@ public class Player {
     
     //Método que devuelve si defiende o no el ataque que recibe el personaje.
     /*public boolean defend(float recivedAttack){
-        return Dice.manageHit(recivedAttack);
+        return manageHit(recivedAttack);
     }*/
     
     /*public void receiveReward(){

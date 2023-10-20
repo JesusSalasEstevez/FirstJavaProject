@@ -1,11 +1,9 @@
 package irrgarten1;
 public class Irrgarten1_1 {
     public static void main(String[] args) {
-        Shield s = new Shield((float)3.0, 2);
-        Weapon w = new Weapon((float)2.0, 2);
-        System.out.println(s.toString());
-        System.out.println(w.toString());
-        System.out.println( w.discard());
+        Labyrinth l = new Labyrinth(10, 10, 3, 3);
+        System.out.println(l.toString());
+        Monster m = new Monster("vinicius", (float)0.1, (float)0.5);
+        System.out.println(m);
     }
-    
 }
