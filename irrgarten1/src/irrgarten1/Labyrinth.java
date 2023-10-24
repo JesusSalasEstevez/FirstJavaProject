@@ -30,9 +30,13 @@ public class Labyrinth {
     }
     
     //Métodos
-    /*public void spreadPlayers(Player players){
-        
-    }*/
+    public void spreadPlayers(Player[] players){
+        for(int i = 0; i < players.length; i++){
+            Player p = players[i];
+            int pos[] = randomEmptyPos();
+            putPlayer2D(-1, -1, pos[0], pos[1], p);
+        }
+    }
     
     //Método que devuelve si hay un jugador en la casilla de salida.
     public boolean haveAWinner(){
@@ -61,27 +65,47 @@ public class Labyrinth {
 
     }
     
-    /*public Monster putPlayer(Directions direction, Player player){
-        
-    }*/
+    public Monster putPlayer(Directions direction, Player player){
+        int oldRow = player.getRow();
+        int oldCol = player.getCol();
+        int newPos[] = dir2Pos(oldRow, oldCol, direction);
+        Monster monster = putPlayer2D(oldRow, oldCol, newPos[0], newPos[1], player);
+        return monster;
+    }
     
-    /*public void addBlock(Orientation orientation, int startRow, int startCol, int length){
-        if(orientation == Orientation.VERTICAL)
-        	for(int i = 0; i < length; i++)
-        		LabyrinthSquare[startRow + i][startCol] = BLOCK_CHAR;
-		else
-        	for(int i = 0; i < length; i++)
-        		LabyrinthSquare[startRow][startCol + i] = BLOCK_CHAR;
-    }*/
+    public void addBlock(Orientation orientation, int startRow, int startCol, int length){
+        int incRow;
+        int incCol;
+        if(orientation == Orientation.VERTICAL){
+            incRow = 1;
+            incCol = 0;
+        }else{
+            incRow = 0;
+            incCol = 1;
+        }
+        int row = startRow;
+        int col = startCol;
+        while(posOK(row, col) && emptyPos(row, col) && length > 0){
+            LabyrinthSquare[row][col] = BLOCK_CHAR;
+            length -= 1;
+            row += incRow;
+            col += incCol;
+        }
+    }
     
-    /*public ArrayList<Directions> validMoves(int row, int col){
+    public Directions[] validMoves(int row, int col){
+        Directions[] output = new Directions[4];
+        if(canStepOn(row+1, col))
+            output[0] = Directions.DOWN;
+        if(canStepOn(row-1, col))
+            output[1] = Directions.UP;
+        if(canStepOn(row, col + 1))
+            output[2] = Directions.LEFT;
+        if(canStepOn(row, col - 1))
+            output[3] = Directions.RIGHT;
         
-        if(posOK(row - 1, col))
-        	
-        else if(posOK(row + 1, col))
-        else if(posOK(row, col - 1))
-        else if(posOK(row, col + 1))
-    }*/
+        return output;
+    }
     
     //Método que devuelve si la posición está dentro del tablero.
     private boolean posOK(int row, int col){
@@ -162,8 +186,28 @@ public class Labyrinth {
         return pos;
     }
     
-    /*private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
-        
-    }*/
+    private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
+        Monster output = null;
+        if(canStepOn(row,col)){
+            if(posOK(row,col)){
+                Player p = players[oldRow][oldCol];
+                if(p == player){
+                    updateOldPos(oldRow, oldCol);
+                    players[oldRow][oldCol] = null;
+                }
+            }
+            boolean monsterPos = monsterPos(row, col);
+            if(monsterPos){
+                LabyrinthSquare[row][col] = COMBAT_CHAR;
+                output = monsters[row][col];
+            }else{
+                char number = player.getNumber();
+                LabyrinthSquare[row][col] = number;
+            }
+            players[row][col] = player;
+            player.setPos(row, col);
+        }
+        return output;
+    }
 }
     

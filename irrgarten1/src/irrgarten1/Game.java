@@ -26,9 +26,27 @@ public class Game {
         return labyrinth.haveAWinner();
     }
     
-    /*public boolean nextStep(Directions preferredDirection){
-        
-    }*/
+    public boolean nextStep(Directions preferredDirection){
+        String log = "";
+        boolean dead = currentPlayer.dead();
+        if(!dead){
+            Directions direction = actualDirection(preferredDirection);
+            if(direction != preferredDirection)
+                logPlayerNoOrders();
+            Monster monster = labyrinth.putPlayer(direction, currentPlayer);
+            if(monster == null)
+                logNoMonster();
+            else{
+                GameCharacter winner = combat(monster);
+                manageReward(winner);
+            }
+        }else
+            manageResurrection();
+        boolean endGame = finished();
+        if(!endGame)
+            nextPlayer();
+        return endGame;
+    }
     
     //Método que generauna instancia de GameState con toda la información del estado del juego.
     public GameState getGameState(){
@@ -61,21 +79,43 @@ public class Game {
         currentPlayer = players.get(currentPlayerIndex);
     }
     
-    /*private Directions actualDirection(Directions preferredDirection){
+    private Directions actualDirection(Directions preferredDirection){
+        return currentPlayer.move(preferredDirection, labyrinth.validMoves(currentPlayer.getRow(), currentPlayer.getCol()));
+    }
     
-    }*/
+    private GameCharacter combat(Monster monster){
+        int rounds = 0;
+        GameCharacter winner = GameCharacter.PLAYER;
+        boolean lose =  monster.defend(currentPlayer.attack());
+        while(!lose && rounds < MAX_ROUNDS){
+            winner = GameCharacter.MONSTER;
+            lose = currentPlayer.defend(monster.attack());
+            rounds ++;
+            if(!lose){
+                lose = monster.defend(currentPlayer.attack());
+                winner = GameCharacter.PLAYER;
+            }
+        }
+        logRounds(rounds, MAX_ROUNDS);
+        return winner;
+    }
     
-    /*private GameCharacter combat(Monster monster){
-        
-    }*/
+    private void manageReward(GameCharacter winner){
+        if(winner == GameCharacter.PLAYER){
+            currentPlayer.receiveReward();
+            logPlayerWon();
+        }else
+            logMonsterWon();
+    }
     
-    /*private void manageReward(GameCharacter winner){
-        
-    }*/
-    
-    /*private void manageResurrection(){
-        
-    }*/
+    private void manageResurrection(){
+       boolean resurrect = Dice.resurrectPlayer();
+       if(resurrect){
+           currentPlayer.resurrect();
+           logResurrected();
+       }else
+           logPlayerSkipTurn();
+    }
     
     private void logPlayerWon(){
          

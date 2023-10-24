@@ -75,13 +75,24 @@ public class Player {
     }
     
     //Método que devuelve si defiende o no el ataque que recibe el personaje.
-    /*public boolean defend(float recivedAttack){
+    public boolean defend(float recivedAttack){
         return manageHit(recivedAttack);
-    }*/
+    }
     
-    /*public void receiveReward(){
-        
-    }*/
+    public void receiveReward(){
+        int wReward = Dice.weaponsReward();
+        int sReward = Dice.shieldsReward();
+        for(int i = 0; i < wReward; i++){
+            Weapon wnew = newWeapon();
+            receiveWeapon(wnew);
+        }
+        for(int i = 0; i < sReward; i++){
+            Shield snew = newShield();
+            receiveShield(snew);
+        }
+        int extrahealth = Dice.healthReward();
+        health += extrahealth;
+    }
     
     //Método to_String;
     @Override
@@ -95,13 +106,31 @@ public class Player {
     }
     
     //
-    /*private void receiveWeapon(Weapon w){
-        
+    private void receiveWeapon(Weapon w){
+        for(int i = 0; i < weapons.size(); i++){
+            Weapon wi = weapons.get(i);
+            boolean discard = wi.discard();
+            if(discard){
+                weapons.remove(i);
+            }
+        }
+        int size = weapons.size();
+        if(size < MAX_WEAPONS)
+            weapons.add(w);
     }
     
     private void receiveShield(Shield s){
-        
-    }*/
+        for(int i = 0; i < shields.size(); i++){
+            Shield si = shields.get(i);
+            boolean discard  = si.discard();
+            if(discard){
+                shields.remove(i);
+            }
+        }
+        int size = shields.size();
+        if(size < MAX_SHIELDS)
+            shields.add(s);
+    }
 
     //Método que crea una nueva instancia de un arma. Recibe los parametros de Dice.
     private Weapon newWeapon(){
@@ -120,9 +149,20 @@ public class Player {
         return sumShields() + intelligence;
     }
     
-    /*private boolean manageHit(float receivedAttack){
-        
-    }*/
+    private boolean manageHit(float receivedAttack){
+        float defense = defensiveEnergy();
+        if (defense < receivedAttack){
+            gotWounded();
+            incConsecutiveHits();
+        }else
+            resetHits();
+        boolean lose;
+        if(consecutiveHits == HITS2LOSE || dead())
+            lose = true;
+        else
+            lose = false;
+        return lose;
+    }
 
     //Método que pone el valor de impactos consecutivos a cero.
     private void resetHits(){
