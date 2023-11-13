@@ -1,4 +1,4 @@
-package irrgarten1;
+package irrgarten;
 public class Shield {
     //Atributos de instancia.
     private float protection;

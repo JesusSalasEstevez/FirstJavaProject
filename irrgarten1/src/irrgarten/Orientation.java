@@ -1,4 +1,4 @@
-package irrgarten1;
+package irrgarten;
 
 public enum Orientation {
     VERTICAL, HORIZONTAL,

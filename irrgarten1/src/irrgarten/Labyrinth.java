@@ -1,4 +1,5 @@
-package irrgarten1;
+package irrgarten;
+import java.util.ArrayList;
 public class Labyrinth {
     //Atributos de instancia de la clase.
     private final char BLOCK_CHAR = 'X';
@@ -30,9 +31,9 @@ public class Labyrinth {
     }
     
     //Métodos
-    public void spreadPlayers(Player[] players){
-        for(int i = 0; i < players.length; i++){
-            Player p = players[i];
+    public void spreadPlayers(ArrayList<Player> players){
+        for(int i = 0; i < players.size(); i++){
+            Player p = players.get(i);
             int pos[] = randomEmptyPos();
             putPlayer2D(-1, -1, pos[0], pos[1], p);
         }
@@ -40,7 +41,7 @@ public class Labyrinth {
     
     //Método que devuelve si hay un jugador en la casilla de salida.
     public boolean haveAWinner(){
-        return players[nRows][nCols] != null;
+        return players[exitRow][exitCol] != null;
     }
     
     //Método toString
@@ -93,17 +94,16 @@ public class Labyrinth {
         }
     }
     
-    public Directions[] validMoves(int row, int col){
-        Directions[] output = new Directions[4];
+    public ArrayList<Directions> validMoves(int row, int col){
+        ArrayList <Directions> output = new ArrayList<>();
         if(canStepOn(row+1, col))
-            output[0] = Directions.DOWN;
+            output.add(Directions.DOWN);
         if(canStepOn(row-1, col))
-            output[1] = Directions.UP;
+            output.add(Directions.UP);
         if(canStepOn(row, col + 1))
-            output[2] = Directions.LEFT;
+            output.add(Directions.RIGHT);
         if(canStepOn(row, col - 1))
-            output[3] = Directions.RIGHT;
-        
+            output.add(Directions.LEFT);
         return output;
     }
     
@@ -189,7 +189,7 @@ public class Labyrinth {
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
         Monster output = null;
         if(canStepOn(row,col)){
-            if(posOK(row,col)){
+            if(posOK(oldRow,oldCol)){
                 Player p = players[oldRow][oldCol];
                 if(p == player){
                     updateOldPos(oldRow, oldCol);

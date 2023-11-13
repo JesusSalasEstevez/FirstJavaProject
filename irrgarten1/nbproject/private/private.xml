@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten1/Irrgarten1_1.java</file>
-            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten1/Labyrinth.java</file>
-            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten1/Player.java</file>
-            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten1/Game.java</file>
-            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten1/Dice.java</file>
-            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten1/Monster.java</file>
+            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten/Labyrinth.java</file>
+            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten/Player.java</file>
+            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten/Irrgarten1_1.java</file>
+            <file>file:/home/jesussalas/Escritorio/Universidad/PDOO/FirstJavaProject/irrgarten1/src/irrgarten/Game.java</file>
         </group>
     </open-files>
 </project-private>

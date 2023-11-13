@@ -1,6 +1,6 @@
-package irrgarten1;
+package irrgarten;
 
-class GameState {
+public class GameState {
     //Atributos de instancia.
     private String labyrinthv;
     private String players;
@@ -23,7 +23,7 @@ class GameState {
         return players;
     }
     
-    public String getLabyrinthv(){
+    public String getLabyrinth(){
         return labyrinthv;
     }
     

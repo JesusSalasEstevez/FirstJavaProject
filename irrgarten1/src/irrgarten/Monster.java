@@ -1,4 +1,4 @@
-package irrgarten1;
+package irrgarten;
 public class Monster {
     //Atributo de clase.
     private static final int INITIAL_HEALTH = 5;
@@ -15,12 +15,13 @@ public class Monster {
         this.name = name;
         this.intelligence = intelligence;
         this.strength = strength;
+        this.health = (float)10;
     }
     
     //Métodos.
     //Método que devuelve si el monstruo esta vivo o muerto.
     public boolean dead(){
-        return health <= 0;
+        return (health <= 0);
     }
     
     public float attack(){
@@ -52,5 +53,9 @@ public class Monster {
     private void gotWounded(){
         health --;
     }
-
+    
+    //Borrar
+    public void getM(){
+        System.out.println(health);
+    }
 }

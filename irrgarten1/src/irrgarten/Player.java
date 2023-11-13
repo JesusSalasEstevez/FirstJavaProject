@@ -1,4 +1,4 @@
-package irrgarten1;
+package irrgarten;
 import java.util.ArrayList;
 public class Player {
     //Atributo de clase.
@@ -60,14 +60,17 @@ public class Player {
     
     //Método que devuelve si está muerto o no el personaje.
     public boolean dead(){
-        return health <= 0;
+        return (health <= 0);
     }
     
-    /*public Directions move (Directions direction, Directions[] validMoves){
-        
-    }*/
-    
-    
+    public Directions move (Directions direction, ArrayList<Directions> validMoves){
+        int size = validMoves.size();
+        boolean contained = validMoves.contains(direction);
+        if (size > 0 && !contained)
+            return validMoves.get(0);
+        else
+            return direction;
+    }
     
     //Método que calcula la suma de fuerza del jugador más la aportada por el arma.
     public float attack(){
@@ -193,6 +196,22 @@ public class Player {
         for(int i = 0; i < shields.size(); i++)
             shield_protection += shields.get(i).protect();
         return shield_protection;
+    }
+    
+    //Borrar
+    public void get(){
+        System.out.println("Posicion " + row + col);
+    }
+    
+    public void estado(){
+        System.out.println(health);
+        System.out.println(strength);
+        System.out.println(intelligence);
+        System.out.println(defensiveEnergy());
+    }
+    
+    public void getVida(){
+        System.out.println(health);
     }
 }   
 

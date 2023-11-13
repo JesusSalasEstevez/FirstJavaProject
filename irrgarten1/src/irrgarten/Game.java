@@ -1,4 +1,4 @@
-package irrgarten1;
+package irrgarten;
 import java.util.ArrayList;
 public class Game {
     //Atributo de clase.
@@ -16,8 +16,9 @@ public class Game {
         currentPlayerIndex = Dice.whoStarts(nplayers);
         players = new ArrayList<>();
         monsters = new ArrayList<>();
-        currentPlayer = players.get(currentPlayerIndex);
+        labyrinth = new Labyrinth(10, 10, 3, 3);
         log = "";
+        configureLabyrinth();
     }
     
     //Métodos
@@ -27,7 +28,6 @@ public class Game {
     }
     
     public boolean nextStep(Directions preferredDirection){
-        String log = "";
         boolean dead = currentPlayer.dead();
         if(!dead){
             Directions direction = actualDirection(preferredDirection);
@@ -67,7 +67,19 @@ public class Game {
     
     //Método que configura el laberinto añadiendo obstaculos y monstruos.
     private void configureLabyrinth(){
-
+        Monster monster;
+        Player player;
+        for(int i = 0; i < 3; i++){
+            monster = new Monster("M"+i, Dice.randomIntelligence(), Dice.randomStrength());
+            player = new Player((char) (i+'0'), Dice.randomIntelligence(), Dice.randomStrength());
+            monsters.add(monster);
+            players.add(player);
+            labyrinth.addBlock(Orientation.VERTICAL,Dice.randomPos(9), Dice.randomPos(9), Dice.randomPos(3));
+            labyrinth.addMonster(Dice.randomPos(9), Dice.randomPos(9), monster);
+        }
+        labyrinth.spreadPlayers(players);
+        currentPlayerIndex = 0;
+        currentPlayer = players.get(currentPlayerIndex);
     }
     
     private void nextPlayer(){
@@ -118,31 +130,36 @@ public class Game {
     }
     
     private void logPlayerWon(){
-         
+        log += "Player " + currentPlayer.getNumber() + "has won";
     }
     
     private void logMonsterWon(){
-        log += "Player " + currentPlayerIndex + " has lost the combat\n";
+        log += "Player " + currentPlayer.getNumber() + " has lost the combat\n";
     }
     
     private void logResurrected(){
-        log += "Player " + currentPlayerIndex + " has resurrected\n";
+        log += "Player " + currentPlayer.getNumber() + " has resurrected\n";
     }
     
     private void logPlayerSkipTurn(){
-        log += "Player " + currentPlayerIndex + " has skiped the turn because is dead\n";
+        log += "Player " + currentPlayer.getNumber() + " has skiped the turn because is dead\n";
     }
     
     private void logPlayerNoOrders(){
-        log += "Player " + currentPlayerIndex + " hasn´t followed the human´s instructions\n";
+        log += "Player " + currentPlayer.getNumber() + " hasn´t followed the human´s instructions\n";
     }
     
     private void logNoMonster(){
-        log += "Player " + currentPlayerIndex + " has moved to an empty square or hasn´t moved\n";
+        log += "Player " + currentPlayer.getNumber() + " has moved to an empty square or hasn´t moved\n";
     }
     
     private void logRounds(int rounds, int max){
-        log += "Player " + currentPlayerIndex + " has reached " + rounds +"/" + max + " rounds\n"; 
+        log += "Player " + currentPlayer.getNumber() + " has reached " + rounds +"/" + max + " rounds\n"; 
+    }
+    
+    //BORRAR
+    public Player getPlayer(int i){
+        return players.get(i);
     }
     
 }

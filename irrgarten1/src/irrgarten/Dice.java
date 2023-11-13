@@ -1,4 +1,4 @@
-package irrgarten1;
+package irrgarten;
 
 import java.util.Random;
 public class Dice {
